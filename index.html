@@ -3,116 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fred AI | Gemini Aura</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>Fred AI | Power OS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --aura-gradient: linear-gradient(135deg, #4285f4, #9b72cb, #d96570);
-            --bg: #f8fafd;
-            --glass: rgba(255, 255, 255, 0.7);
+            --power-blue: #00d2ff;
+            --deep-space: #05050a;
+            --glass: rgba(255, 255, 255, 0.05);
         }
 
         body {
-            background-color: var(--bg);
-            background-image: radial-gradient(at 0% 0%, hsla(253,16%,7%,0) 0, transparent 50%), 
-                              radial-gradient(at 50% 0%, rgba(66,133,244,0.1) 0, transparent 50%);
-            margin: 0; height: 100vh;
+            background: var(--deep-space); margin: 0; height: 100vh;
             display: flex; justify-content: center; align-items: center;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden;
+            perspective: 1000px;
         }
 
-        /* The Pulsing Aura Frame */
-        .aura-frame {
-            position: relative;
-            width: 95%; max-width: 600px; height: 85vh;
-            padding: 3px; /* The border thickness */
-            background: var(--aura-gradient);
-            background-size: 300% 300%;
-            border-radius: 32px;
-            animation: moveGradient 8s linear infinite;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        /* Animated Neural Background */
+        .neural-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #05050a 100%);
+            z-index: -1;
         }
 
-        @keyframes moveGradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .neural-bg::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.1;
         }
 
-        /* The Main Container */
-        #fred-tablet {
-            width: 100%; height: 100%;
-            background: white;
-            border-radius: 30px;
+        /* The Main Power Unit */
+        #power-unit {
+            width: 95%; max-width: 700px; height: 85vh;
+            background: var(--glass);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
             display: flex; flex-direction: column;
-            overflow: hidden;
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+            transform: rotateX(2deg);
+            transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
+
+        #power-unit:hover { transform: rotateX(0deg) scale(1.01); box-shadow: 0 0 120px rgba(0, 210, 255, 0.1); }
 
         #header {
-            padding: 20px; text-align: center;
-            font-weight: 700; font-size: 1.1rem;
-            color: #1f1f1f; letter-spacing: -0.5px;
-            border-bottom: 1px solid #f1f3f4;
+            padding: 25px; border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .status-dot {
+            width: 8px; height: 8px; background: #00ff88;
+            border-radius: 50%; box-shadow: 0 0 10px #00ff88;
+            margin-right: 10px;
         }
 
         #inbox {
-            flex: 1; padding: 25px; overflow-y: auto;
-            display: flex; flex-direction: column; gap: 15px;
-            scrollbar-width: none;
+            flex: 1; padding: 30px; overflow-y: auto;
+            display: flex; flex-direction: column; gap: 20px;
+            scrollbar-width: thin; scrollbar-color: var(--power-blue) transparent;
         }
 
+        /* Powerful Bubbles */
         .bubble {
-            padding: 14px 20px; border-radius: 20px;
-            max-width: 85%; font-size: 0.95rem; line-height: 1.5;
-            transition: 0.3s ease;
+            padding: 16px 22px; border-radius: 12px;
+            max-width: 80%; line-height: 1.6; font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+            animation: powerUp 0.3s ease-out forwards;
         }
 
         .user {
-            background: #f0f4f9; color: #1f1f1f;
-            align-self: flex-end; border-bottom-right-radius: 4px;
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid var(--power-blue);
+            align-self: flex-end; border-bottom-right-radius: 2px;
         }
 
         .ai {
-            background: white; color: #1f1f1f;
-            align-self: flex-start; border: 1px solid #f1f3f4;
-            border-bottom-left-radius: 4px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            align-self: flex-start; border-bottom-left-radius: 2px;
         }
 
-        /* Input Area */
-        .input-hub {
-            padding: 20px; background: white;
-            display: flex; gap: 10px; align-items: center;
+        /* Command Input */
+        .command-bar {
+            padding: 30px; display: flex; gap: 15px;
+            background: rgba(0,0,0,0.2);
         }
 
         input {
-            flex: 1; background: #f0f4f9;
-            border: 2px solid transparent; border-radius: 30px;
-            padding: 15px 25px; font-size: 1rem; outline: none;
-            transition: 0.2s;
+            flex: 1; background: transparent; border: none;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            padding: 12px 5px; color: white; font-size: 1rem;
+            outline: none; transition: 0.3s;
         }
 
-        input:focus { background: white; border-color: #4285f4; }
+        input:focus { border-color: var(--power-blue); }
 
         button {
-            background: var(--aura-gradient); color: white;
-            border: none; padding: 12px 25px; border-radius: 30px;
-            font-weight: 700; cursor: pointer;
+            background: transparent; color: var(--power-blue);
+            border: 1px solid var(--power-blue);
+            padding: 10px 25px; border-radius: 5px;
+            font-family: 'Syncopate', sans-serif; font-size: 0.7rem;
+            cursor: pointer; transition: 0.3s;
         }
+
+        button:hover { background: var(--power-blue); color: black; box-shadow: 0 0 20px var(--power-blue); }
+
+        @keyframes powerUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<div class="aura-frame">
-    <div id="fred-tablet">
-        <div id="header">Fred AI × Gemini</div>
-        <div id="inbox">
-            <div class="bubble ai">Hello. I am Fred. My interface has been updated to reflect the Gemini aesthetic. How can I help?</div>
+<div class="neural-bg"></div>
+
+<div id="power-unit">
+    <div id="header">
+        <div style="display:flex; align-items:center;">
+            <div class="status-dot"></div>
+            <span style="font-family:'Syncopate'; font-size: 0.8rem; color: #fff;">CORE_V1.0</span>
         </div>
-        <div class="input-hub">
-            <input type="text" id="userInput" placeholder="Ask anything...">
-            <button onclick="askFred()">Ask</button>
-        </div>
+        <span style="font-size: 0.7rem; color: rgba(255,255,255,0.4);">MEM_CAPACITY: 100%</span>
+    </div>
+
+    <div id="inbox">
+        <div class="bubble ai">SYSTEM INITIALIZED. COMMANDS ACCEPTED.</div>
+    </div>
+
+    <div class="command-bar">
+        <input type="text" id="userInput" placeholder="ENTER_COMMAND_">
+        <button onclick="askFred()">EXECUTE</button>
     </div>
 </div>
 
@@ -121,7 +140,7 @@
 
     window.onload = () => {
         if (!FRED_KEY) {
-            FRED_KEY = prompt("Enter your GitHub AI Power Key:");
+            FRED_KEY = prompt("CORE REQUIRES AUTHENTICATION (Paste Token):");
             if (FRED_KEY) localStorage.setItem('fred_power', FRED_KEY);
         }
     };
@@ -132,7 +151,7 @@
         if (!input.value || !FRED_KEY) return;
 
         const text = input.value;
-        inbox.innerHTML += `<div class="bubble user">${text}</div>`;
+        inbox.innerHTML += `<div class="bubble user">> ${text}</div>`;
         input.value = '';
         inbox.scrollTop = inbox.scrollHeight;
 
@@ -145,7 +164,7 @@
             const data = await response.json();
             inbox.innerHTML += `<div class="bubble ai">${data.choices[0].message.content}</div>`;
         } catch (e) {
-            inbox.innerHTML += `<div class="bubble ai" style="color:red;">Failed to connect to the brain.</div>`;
+            inbox.innerHTML += `<div class="bubble ai" style="color:#ff4b2b;">CONNECTION_INTERRUPTED.</div>`;
         }
         inbox.scrollTop = inbox.scrollHeight;
     }

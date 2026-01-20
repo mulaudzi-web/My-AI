@@ -3,159 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fred AI | Elite</title>
+    <title>Fred AI | The Elite</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Plus+Jakarta+Sans:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --neon-blue: #00f2fe;
-            --neon-purple: #7000ff;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-        }
-
-        body {
-            background: #020205;
-            margin: 0; height: 100vh;
-            display: flex; justify-content: center; align-items: center;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow: hidden;
-        }
-
-        /* The Moving Nebula Background */
-        .nebula {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 20%, #1a0b2e 0%, transparent 40%),
-                        radial-gradient(circle at 80% 80%, #001a1a 0%, transparent 40%);
-            z-index: -1; animation: drift 20s infinite alternate ease-in-out;
-        }
-
-        @keyframes drift { from { transform: scale(1); } to { transform: scale(1.2); } }
-
-        /* The Main Chat Tablet */
-        #fred-tablet {
-            width: 95%; max-width: 550px; height: 85vh;
-            background: var(--glass);
-            backdrop-filter: blur(50px) saturate(200%);
-            border: 1px solid var(--border);
-            border-radius: 40px;
-            display: flex; flex-direction: column;
-            box-shadow: 0 0 100px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(255,255,255,0.05);
-            position: relative;
-        }
-
-        #header {
-            padding: 30px; text-align: center;
-            font-family: 'Syncopate', sans-serif;
-            letter-spacing: 6px; font-size: 1.2rem;
-            color: var(--neon-blue);
-            text-shadow: 0 0 15px var(--neon-blue);
-            border-bottom: 1px solid var(--border);
-        }
-
-        #inbox {
-            flex: 1; padding: 30px;
-            overflow-y: auto; display: flex; flex-direction: column;
-            gap: 25px; scrollbar-width: none;
-        }
-
-        .bubble {
-            padding: 18px 25px; border-radius: 25px;
-            max-width: 75%; line-height: 1.6;
-            font-weight: 500; font-size: 0.95rem;
-            position: relative; animation: bloom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .user {
-            background: linear-gradient(135deg, var(--neon-blue), #4facfe);
-            color: #000; align-self: flex-end;
-            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4);
-            border-bottom-right-radius: 4px;
-        }
-
-        .ai {
-            background: rgba(255, 255, 255, 0.07);
-            color: #fff; align-self: flex-start;
-            border: 1px solid var(--border);
-            border-bottom-left-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .input-hub {
-            padding: 25px 35px; display: flex; gap: 15px;
-            background: rgba(0,0,0,0.3); border-radius: 0 0 40px 40px;
-        }
-
-        input {
-            flex: 1; background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border); border-radius: 18px;
-            padding: 16px 20px; color: white; font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        input:focus { border-color: var(--neon-blue); outline: none; box-shadow: 0 0 20px rgba(0,242,254,0.2); }
-
-        button {
-            background: white; color: black; border: none;
-            padding: 0 30px; border-radius: 18px;
-            font-weight: 900; cursor: pointer; transition: 0.3s;
-        }
-
-        button:hover { background: var(--neon-blue); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,242,254,0.4); }
-
-        @keyframes bloom {
-            from { opacity: 0; transform: scale(0.8) translateY(30px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
+        :root { --neon: #00f2fe; --glass: rgba(255, 255, 255, 0.03); }
+        body { background: #020205; margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
+        .nebula { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 20%, #1a0b2e 0%, transparent 40%), radial-gradient(circle at 80% 80%, #001a1a 0%, transparent 40%); z-index: -1; }
+        #fred-tablet { width: 95%; max-width: 550px; height: 85vh; background: var(--glass); backdrop-filter: blur(50px) saturate(200%); border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; display: flex; flex-direction: column; box-shadow: 0 0 100px rgba(0,0,0,0.9); }
+        #header { padding: 30px; text-align: center; font-family: 'Syncopate', sans-serif; letter-spacing: 6px; color: var(--neon); text-shadow: 0 0 15px var(--neon); border-bottom: 1px solid rgba(255,255,255,0.1); }
+        #inbox { flex: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 25px; scrollbar-width: none; }
+        .bubble { padding: 18px 25px; border-radius: 25px; max-width: 75%; font-size: 0.95rem; animation: bloom 0.4s ease; }
+        .user { background: linear-gradient(135deg, var(--neon), #4facfe); color: #000; align-self: flex-end; box-shadow: 0 10px 30px rgba(0, 242, 254, 0.4); }
+        .ai { background: rgba(255, 255, 255, 0.07); color: #fff; align-self: flex-start; border: 1px solid rgba(255,255,255,0.1); }
+        .input-hub { padding: 25px 35px; display: flex; gap: 15px; background: rgba(0,0,0,0.3); border-radius: 0 0 40px 40px; }
+        input { flex: 1; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 16px 20px; color: white; outline: none; }
+        button { background: white; border: none; padding: 0 30px; border-radius: 18px; font-weight: 900; cursor: pointer; }
+        @keyframes bloom { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
 <body>
-
-<div class="nebula"></div>
-
-<div id="fred-tablet">
-    <div id="header">FRED AI</div>
-    <div id="inbox">
-        <div class="bubble ai">Secure link established. I am Fred. How can I assist you today?</div>
+    <div class="nebula"></div>
+    <div id="fred-tablet">
+        <div id="header">FRED AI</div>
+        <div id="inbox"><div class="bubble ai">Fred AI System Online. Please enter your Key to begin.</div></div>
+        <div class="input-hub">
+            <input type="text" id="userInput" placeholder="Type command...">
+            <button onclick="askFred()">SEND</button>
+        </div>
     </div>
-    <div class="input-hub">
-        <input type="text" id="userInput" placeholder="Type your command...">
-        <button onclick="askFred()">SEND</button>
-    </div>
-</div>
 
-<script>
-    async function askFred() {
-        const input = document.getElementById('userInput');
-        const inbox = document.getElementById('inbox');
-        const text = input.value;
-        if (!text) return;
+    <script>
+        // THIS IS THE SECRET: The key is not in the code!
+        let FRED_KEY = "";
 
-        inbox.innerHTML += `<div class="bubble user">${text}</div>`;
-        input.value = '';
-        inbox.scrollTop = inbox.scrollHeight;
+        // Asks for the key when you open your website
+        window.onload = () => {
+            FRED_KEY = prompt("Enter your GitHub AI Token:");
+        };
 
-        try {
-            const response = await fetch("https://models.inference.ai.azure.com/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer PASTE_YOUR_TOKEN_HERE" 
-                },
-                body: JSON.stringify({
-                    messages: [{ role: "user", content: text }],
-                    model: "gpt-4o-mini"
-                })
-            });
+        async function askFred() {
+            const input = document.getElementById('userInput');
+            const inbox = document.getElementById('inbox');
+            if (!input.value || !FRED_KEY) return;
 
-            const data = await response.json();
-            const aiText = data.choices[0].message.content;
-            inbox.innerHTML += `<div class="bubble ai">${aiText}</div>`;
-            inbox.scrollTop = inbox.scrollHeight;
-        } catch (err) {
-            inbox.innerHTML += `<div class="bubble ai" style="color:#ff4b2b;">CONNECTION ERROR: Ensure your token is correct.</div>`;
+            inbox.innerHTML += `<div class="bubble user">${input.value}</div>`;
+            const userText = input.value;
+            input.value = '';
+
+            try {
+                const response = await fetch("https://models.inference.ai.azure.com/chat/completions", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${FRED_KEY}` },
+                    body: JSON.stringify({ messages: [{ role: "user", content: userText }], model: "gpt-4o-mini" })
+                });
+                const data = await response.json();
+                inbox.innerHTML += `<div class="bubble ai">${data.choices[0].message.content}</div>`;
+                inbox.scrollTop = inbox.scrollHeight;
+            } catch (e) {
+                alert("Error! Is your key correct?");
+            }
         }
-    }
-</script>
-
+    </script>
 </body>
 </html>
